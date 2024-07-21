@@ -1,3 +1,5 @@
+import os
+
 def generate_k_mers(sequence: str, k: int) -> list[str]:
   k_mers = []
   for i in range(len(sequence) - k + 1):
@@ -8,6 +10,10 @@ def generate_k_mers(sequence: str, k: int) -> list[str]:
   return k_mers
 
 def export_k_mers(k_mers: list[str], output_file: str) -> None:
+  directory = os.path.dirname(output_file)
+  if directory and not os.path.exists(directory):
+    os.makedirs(directory)
+
   with open(output_file, 'w') as f:
     for i in range(len(k_mers)):
       if i == len(k_mers) - 1:
